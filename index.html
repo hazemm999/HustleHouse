@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hustle House — احجز مكانك</title>
+<meta name="description" content="Hustle House — A space designed for dreamers, doers, and everyone in between. مساحة عمل مشتركة مفتوحة 24 ساعة، احجز مكانك في ثوانٍ والتأكيد يوصلك على واتساب.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Bebas+Neue&family=Yellowtail&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f1e6;
+    --ink:#1f3d31;
+    --ink-soft:#57685e;
+    --green:#2f5d47;
+    --green-deep:#1c3a2c;
+    --coral:#e8543a;
+    --cream:#f3ead9;
+    --surface:#ffffff;
+    --surface-tint:#ecf1ea;
+    --line:#dde3d9;
+    --radius:20px;
+    --font:'Cairo',sans-serif;
+    --font-display:'Bebas Neue',sans-serif;
+    --font-script:'Yellowtail',cursive;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation:none !important; transition:none !important;} }
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.6;text-align:right;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:var(--font-display);font-weight:400;letter-spacing:0.5px;margin:0;}
+  a{color:inherit;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+  .eyebrow{font-weight:800;font-size:13px;letter-spacing:0.02em;color:var(--green-deep);display:flex;align-items:center;gap:8px;justify-content:flex-start;font-family:var(--font);}
+  .eyebrow .dot{width:9px;height:9px;border-radius:50%;background:var(--coral);flex-shrink:0;}
+
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(246,241,230,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .nav-inner{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-start;padding:10px 24px;max-width:1180px;margin:0 auto;direction:ltr;row-gap:8px;}
+  .brand{display:flex;align-items:center;gap:10px;direction:rtl;}
+  .brand-logo{height:52px;width:52px;object-fit:cover;border-radius:50%;display:block;border:2px solid var(--green);box-shadow:0 4px 14px rgba(28,58,44,0.18);}
+  .foot-logo{height:30px;width:30px;object-fit:cover;border-radius:50%;display:block;border:1px solid rgba(255,255,255,0.3);}
+  .brand-mark{font-family:var(--font-display);font-size:22px;font-weight:400;color:var(--green-deep);letter-spacing:0.5px;white-space:nowrap;}
+  .foot-mark{font-family:var(--font-display);font-size:19px;font-weight:400;color:#fff;letter-spacing:0.5px;white-space:nowrap;}
+  .nav-links{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;gap:30px;font-size:15px;font-weight:700;direction:rtl;}
+  .nav-links a{text-decoration:none;color:var(--ink-soft);padding:6px 2px;border-bottom:3px solid transparent;}
+  .nav-links a.active{color:var(--ink);border-color:var(--coral);}
+  .nav-links a:hover, .nav-links a:focus-visible{color:var(--ink);border-color:var(--coral);}
+  @media (max-width:820px){
+    .nav-inner{justify-content:space-between;}
+    .nav-links{position:static;transform:none;width:100%;order:3;gap:22px;font-size:14px;justify-content:flex-end;}
+  }
+
+  .hero{position:relative;overflow:hidden;padding:64px 24px 90px;}
+  .hero::before{
+    content:"";position:absolute;top:0;left:0;width:100%;height:100%;
+    background:
+      radial-gradient(circle at 85% 10%, rgba(47,93,71,0.18), transparent 40%),
+      radial-gradient(circle at 10% 90%, rgba(232,84,58,0.10), transparent 45%);
+    z-index:0;
+  }
+  .hero::after{
+    content:"";position:absolute;top:0;left:0;width:100%;height:100%;
+    background:linear-gradient(135deg, var(--green-deep) 0%, var(--green) 45%, #4f7c65 100%);
+    clip-path:polygon(58% 0, 100% 0, 100% 100%, 41% 100%);
+    z-index:0;
+  }
+  .hero-inner{max-width:1180px;margin:0 auto;position:relative;z-index:2;direction:ltr;}
+  .hero-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:36px;align-items:center;}
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} .hero::after{display:none;} }
+  .hero-copy{direction:rtl;}
+  .hero-tagline-en{font-family:var(--font-script);font-weight:400;font-size:clamp(28px,3.6vw,38px);color:var(--coral);margin:0 0 6px;direction:ltr;text-align:right;}
+  .hero h1{font-weight:400;font-size:clamp(38px,5.6vw,58px);line-height:1.15;margin:0 0 22px;text-transform:uppercase;}
+  .hero h1 span{display:block;}
+  .hero h1 .hl{color:var(--coral);font-family:var(--font-script);text-transform:none;font-size:1.15em;}
+  .hero p.lead{font-size:17px;color:var(--ink-soft);max-width:460px;margin:0 0 30px;font-family:var(--font);}
+  .btn{font-family:var(--font);font-weight:800;font-size:15px;padding:16px 30px;border-radius:999px;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:10px;}
+  .btn-primary{background:linear-gradient(90deg,var(--green),var(--green-deep));color:#fff;}
+  .btn-primary:hover{filter:brightness(1.08);}
+  .btn:focus-visible{outline:3px solid var(--coral);outline-offset:2px;}
+
+  .book-card{position:relative;z-index:2;background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:30px;box-shadow:0 24px 60px rgba(31,61,49,0.16);direction:rtl;}
+  .book-card-head{display:flex;align-items:center;gap:14px;margin-bottom:22px;}
+  .book-card-icon{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--green),var(--green-deep));color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+  .book-card-head h3{font-size:24px;margin-bottom:2px;text-transform:uppercase;}
+  .book-card-head p{margin:0;color:var(--ink-soft);font-size:13.5px;font-family:var(--font);font-weight:400;}
+
+  .branch-tag{display:flex;align-items:center;gap:10px;background:var(--surface-tint);border:1px dashed var(--green);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:13.5px;color:var(--ink-soft);}
+  .branch-tag b{color:var(--ink);font-weight:800;}
+
+  .field{margin-bottom:16px;}
+  .field label{display:block;font-size:13.5px;font-weight:800;margin-bottom:7px;}
+  .field input, .field select{width:100%;padding:13px 14px;border:2px solid var(--line);border-radius:12px;font-family:var(--font);font-size:14.5px;background:#fff;color:var(--ink);text-align:right;}
+  .field select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2357685e' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 14px center;padding-left:36px;}
+  .field input::placeholder{color:#a9b3a6;}
+  .field input:focus, .field select:focus{outline:none;border-color:var(--green);}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .submit-btn{width:100%;background:linear-gradient(90deg,var(--green),var(--green-deep));color:#fff;border:none;padding:16px;border-radius:12px;font-family:var(--font);font-weight:800;font-size:16px;cursor:pointer;margin-top:4px;}
+  .submit-btn:hover{filter:brightness(1.08);}
+  .submit-btn:disabled{opacity:0.6;cursor:not-allowed;}
+  .status-msg{margin-top:14px;font-size:13.5px;padding:12px 14px;border-radius:10px;display:none;font-weight:700;text-align:center;}
+  .status-msg.show{display:block;}
+  .status-msg.ok{background:var(--surface-tint);color:var(--green-deep);border:2px solid var(--green);}
+  .status-msg.err{background:#fdeceb;color:#b5311f;border:2px solid var(--coral);}
+  .avail-msg{display:none;margin-top:8px;font-size:13px;font-weight:800;padding:9px 12px;border-radius:9px;}
+  .avail-msg.show{display:block;}
+  .avail-msg.busy{background:#fdeceb;color:#b5311f;border:2px solid var(--coral);}
+  .avail-msg.free{background:var(--surface-tint);color:var(--green-deep);border:2px solid var(--green);}
+  .avail-msg.checking{background:#f2f2f2;color:var(--ink-soft);border:2px solid var(--line);}
+
+  .section{padding:84px 24px;}
+  .section.tint{background:var(--surface-tint);}
+  .section-head{max-width:600px;margin:0 0 44px;}
+  .section-head h2{font-size:clamp(30px,4vw,44px);margin-top:14px;text-transform:uppercase;}
+  .section-head p{color:var(--ink-soft);font-size:16px;margin-top:12px;font-family:var(--font);}
+
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:26px;}
+  .step .num{font-family:var(--font-script);font-size:48px;color:var(--coral);line-height:1;margin-bottom:6px;}
+  .step h3{font-size:20px;margin-bottom:8px;text-transform:uppercase;}
+  .step p{color:var(--ink-soft);font-size:14px;margin:0;font-family:var(--font);font-weight:400;}
+
+  footer{border-top:1px solid var(--line);padding:40px 24px;background:var(--green-deep);color:#fff;}
+  .foot-inner{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;font-size:13px;color:#cfe0d5;direction:ltr;}
+  .foot-brand{display:flex;align-items:center;gap:8px;color:#fff;font-weight:800;direction:rtl;}
+  .foot-branches{direction:rtl;text-align:right;}
+  .foot-branches div{margin-bottom:4px;}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="brand">
+      <img class="brand-logo" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAFAAUADASIAAhEBAxEB/8QAHAABAAMBAQEBAQAAAAAAAAAAAAEGBwkIBQME/8QARRABAAECAwQHBQQFCQkAAAAAAAECBAMFBgcRN3UIITEycbKzUVZhlNEJEhlBFBYYItMTFRdFUlRigpEkJTZCZIGSoaL/xAAbAQEAAwEBAQEAAAAAAAAAAAAAAQMEBwYCBf/EACsRAQABAwEHAwUAAwAAAAAAAAABAgMxcQQREjNRUrEVIUEFFDJhkUKB8P/aAAwDAQACEQMRAD8A8+AKnhwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABZtmWlMHXe0TTWnLm4xLS3zW/wrPEx8GImvDprndNVMT1TPirLQujzx32f87tvMicLbURVcpiesPV8fZ1aW98s8+Wt/ofh1aW98s8+Wt/o9aR2JZIrq6vb+n7L2PJX4dWlvfLPPlrf6Jj7OnS0zEfrlnnXP92t/o9aJp71PjCeKrqn07Zexxz1vkGFpTWmf5Jg41dxg5bmFxZ0YuJERVXTh4lVEVTEdW+d2/qfEW/bDxb1tzu99etUGqMPC1xEVTEACXwAALJs10tg652hab07cY+Ja4Ga3+DZ4mPgxE14dNdW6aqYnqmY+Ktr/wBH7jpoDndr54ROFlqIquUxPWHrKPs6tLe+WefLW/0Pw6tLe+WefLW/0etI7EsnFV1e49P2XseSvw6tLe+WefLW/wBEx9nTpaZiP1yzz5a3+j1oU96PFPFV1PT9l7HI692Z3l3tbzLQ+RzN7cYOZ3Fhg41zVGHH3MKqqKsXEnspppoomuqeyIiWmZJ0b8tzrIozGwwtcZ/l801TTnmUZNbU2eNFPert8HGxqcfHw43T+9TETMdkPzyiiq96RG1nKraN+a5taaiy/LYid1Vd1XFc0UU/4q6aa6Y9s1bvzXfWmj9Q7Uto2idc6Fz20ynSlplNhhYWdTfYWHRp6cDD+7jUYuFVVFVFVMxP7u797fuX75eYos0bpnh3++7d/wB0+f8AWHnLXmhcfQ2YWdP6ZgZrlWY20XuW5pa01U4V3gTVNP3opq/eoqpqpqpqoq66aqZifymaw1/bDizg7OdC2t3f/wA55hj32dZrh3dWF/JVY9nj3NEYON9z/kpxasPFxKY9lW/82QPuPdgvUxRXuj9eABKkAAAAAAAAAAAAAAAAaF0eeO+z/ndt5metC6PPHfZ/zu28yJwusc2nWPLrHHYlEdiWKMOjiae9T4whNPep8YEuQ+2Hi3rbnd769aoLfth4t6253e+vWqDbGHNbn5zqAJVgAC/9H7jpoDndr54UBf8Ao/cdNAc7tfPCJxK6zzKdYdZo7EojsSxOjhT3o8Qp70eIOSG125xrLbRrK4t8XEt7jBz+7xMPFwqpproqjHqmKqZjriYmImJh/bjbbs0v8ebzMtO6RzjOJn71Wb5hkODiXWJV/brmN1GJV/iqomZ/Pe+btn4v6455e+vWprZEeznVddVNdXDPy+lqPUmaauzm5zbOb7FzHMbiYnEuMaY3zujdTERG6KaYiIiKYiIiIiIiHzQfSiZmZ3yACAAAAAAAAAAAAAAAABoXR5477P8Andt5metC6PPHfZ/zu28yJwusc2nWPLrHHYlEdiWKMOjiae9T4whNPep8YEuQ+2Hi3rbnd769aoLfth4t6253e+vWqDbGHNbn5zqAJVgAC/8AR+46aA53a+eFAX/o/cdNAc7tfPCJxK6zzKdYdZo7EojsSxOjhT3o8Qp70eIORe2fi/rjnl769amrltn4v6455e+vWprbGHN7vMq1AEqgAAAAAAAAAAAAAAAAABoXR5477P8Andt5metC6PPHfZ/zu28yJwusc2nWPLrHHYlEdiWKMOjiae9T4whNPep8YEuQ+2Hi3rbnd769aoLhthif6WtbdX9d3vr1qhun2S2xhzW5+c6oE7p9km6fZKVaBO6fZJun2SCF/wCj9x00Bzu188KDun2Sv/R+if6c9AdX9d2vnhE4ldZ5lOsOssdiUR2JYnRwp70eIU96PEHIvbPxf1xzy99etTVy2z8X9cc8vfXrU1tjDm93mVagCVQAAAAAAAAAAAAAAAAAA0Lo88d9n/O7bzM9aF0eeO+z/ndt5kThdY5tOseXWOOxKI7EsUYdHCJ3TvAGVZt0WtleeZreZlfaOtLi+vMau4x8arHx4nExK6pqqqmIxIjrmZnqfy/sjbIPcez+YuP4jXxO+erP9vZn/CP5DIP2RtkHuPZ/MXH8Q/ZG2Qe5Fn8xcfxGviN89T7ax2R/IZB+yNsg9x7P5i4/iH7I2yD3Is/mLj+I18N89T7ax2R/IZB+yNsg9x7P5i4/iP7si6MWy/TOdWOb5ZpC1tMyscam4t7inHx5nDxKZ301RE4kx1T7YaiJ3z1I2ezHvFEfyABDQFPejxCnvR4g5F7Z+L+uOeXvr1qauW2fi/rjnl769amtsYc3u8yrUASqAAAAAAAAAAAAAAAAAAGhdHnjvs/53beZnrQujzx32f8AO7bzInC6xzadY8uscdiUR2JYow6OAAA/C+vrbK7LHvLy4wrS0wKJxMW4x64ow8OmO2qqqeqI+MhM7veX7jy3tL6fOk9NY+LZ6Ty7G1Zc0TNP6ZVXNtZxP+GqYmuuPjFMR8WH5t0+tpt9jzVZ4GQ5Xhflh4djVjTH+auud/8AosiiqX5dz6ns1ud2/fo6KDnbk/T72lWGNFV9bZDmuFv68OuyqwZmPhVRX1f6S3XZl089Hasx8Ky1RZY2kLyuYpi5rr/l7KZ+NcRFVH+and8UTRVBa+pbNcndv3avTo/K2usG9tsK4t8bDuLfGojEw8bCriuiumeyqmqOqYn2w/V8P1MgABT3o8Qp70eIORe2fi/rjnl769amrltn4v6455e+vWprbGHN7vMq1AEqgAAAAAAAAAAAAAAAAABoXR5477P+d23mZ60Lo88d9n/O7bzInC6xzadY8uscdiUR2JYow6OAA/hzvO7DTeT3ua5pdYdjl1lg1Y9xc4s7qcOimN8zP0/Od0OZ/SL6Smc7cM5xLXArxct0hb4n+yZZv3TjbuzGx93erntinso7I698zt32gW1fFwYynZ7YY00UYtFOZZp92e9TvmMDCn4b4qrmPhQ8UtFun5l5L6ptlVVc2KJ9oz+wBc8+AA3Po2dJ3NdiubYOWZjiY2Y6Lx8TdcWW/wC9VaTPbjYHs3dtVHZVHsq3S6VZZmdpnOXWt/YXGHeWV1hU4+BcYNX3qMSiqN9NVM+yYlxie5vs/wDavi5plGa6Bv8AGmuvLaf0/LfvT1xgVVbsXDj4U11RVEflFc+xRcp+Yei+l7ZVFUWK59pw9gAKHqwp70eIU96PEHIvbPxf1xzy99etTVy2z8X9cc8vfXrU1tjDm93mVagCVQAAAAAAAAAAAAAAAAAA0Lo88d9n/O7bzM9aF0eeO+z/AJ3beZE4XWObTrHl1jjsSiOxLFGHRw3b+qO0TT3qfGAcpekxqDE1Lt71xd11TVTh5lXZ4e/8qMGIwqY/+P8A2zJcNsU79retpnt/nu99etT22MOb3pmq5VM9ZAEqgABrvRLz/E090htGYlFU00XdzVl+LH9qjGw6qd3/AJfdn/syJoHR9mY26aAmJ3f77tfPD5nEr7EzF2iY6x5dZY64hKI7EsbowU96PEKe9HiDkXtn4v6455e+vWpq5bZ+L+uOeXvr1qa2xhze7zKtQBKoAAAAAAAAAAAAAAAAAAaF0eeO+z/ndt5metC6PPHfZ/zu28yJwusc2nWPLrHHYlEdiWKMOjiae9T4whNPep8YEuQ+2Hi3rbnd769aoLfth4t6253e+vWqDbGHNbn5zqAJVgAC/wDR+46aA53a+eFAX/o/cdNAc7tfPCJxK6zzKdYdZo7EojsSxOjhT3o8Qp70eIORe2fi/rjnl769amrltn4v6455e+vWprbGHN7vMq1AEqgAAAAAAAAAAAAAAAAABoXR5477P+d23mZ6s2zPVeDoTaJprUdzb4l3b5Vf4V5iYGDMRXiU0TvmmmZ6omfiicLbUxTcpmfiYdf47EvJcfaK6V3f8G558zb/AFPxFdK+5uefM2/1ZOCro9t6js3f5etE096nxh5K/EV0r7m558zb/VMfaLaViYn9Tc86p/vNv9U8NXQ9R2bv8vHe2Hi3rbnd769aoPt64z/C1XrTP87wcGu3wcyzC4vKMLEmJqopxMSquKZmOrfG/d1PiNUYeHrmJqmYAEvgAAX/AKP3HTQHO7XzwoCybNdU4OhtoWm9RXGBiXVvlWYYN5iYGDMRXiU0Vb5ppmeqJn4onCy1MU10zPWHYGOxLyX+IrpX3Nzz5m3+p+IrpX3Nzz5m3+rJw1dHt/Udm7/L1oU96PF5L/EV0r7m558zb/Uj7RbSsTE/qbnnV/1Nv9U8NXQ9R2bv8vH+2fi/rjnl769amvu671Dhat1vqDPMHBrt8HM8wx7yjBxZiaqKcTEmqKZmOqZjf+T4TVGHiLkxNczAAlWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//9k=" alt="H">
+      <span class="brand-mark">Hustle House</span>
+    </div>
+    <nav class="nav-links">
+      <a href="#home" class="active">الرئيسية</a>
+    </nav>
+  </div>
+</header>
+
+<section id="home" class="hero">
+  <div class="hero-inner">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="hero-tagline-en">A Space</div>
+        <div class="eyebrow"><span class="dot"></span> مساحة عمل مشتركة — مفتوحة 24 ساعة</div>
+        <h1>
+          <span>designed for dreamers,</span>
+          <span>doers, and <span class="hl">everyone</span></span>
+          <span class="hl">in between</span>
+        </h1>
+        <p class="lead">مساحة هادية ومفتوحة طول اليوم، لوحدك أو مع فريقك. احجز مكانك دلوقتي والتأكيد يوصلك على واتساب.</p>
+      </div>
+
+      <div class="book-card">
+        <div class="book-card-head">
+          <span class="book-card-icon">📅</span>
+          <div>
+            <h3>احجز مكانك</h3>
+            <p>في ثواني، والتأكيد على واتساب</p>
+          </div>
+        </div>
+        <form id="bookingForm">
+          <div class="branch-tag">📍 الفرع: <b>المشايه — أمام بوابة البارون، أعلى محل سيكريت، الدور الأول</b></div>
+          <input type="hidden" id="branch" name="branch" value="المشايه (أمام بوابة البارون) - الدور الأول">
+          <div class="field">
+            <label for="room">الغرفة</label>
+            <select id="room" name="room" required>
+              <option value="" disabled selected>اختر الغرفة</option>
+              <option value="Room 1">Room 1</option>
+              <option value="Room 2">Room 2</option>
+              <option value="Room 3">Room 3</option>
+              <option value="Room 4">Room 4</option>
+              <option value="Room 5">Room 5</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="date">التاريخ</label>
+            <input type="date" id="date" name="date" required>
+          </div>
+          <div class="field">
+            <label for="time">الوقت</label>
+            <input type="time" id="time" name="time" required>
+            <div class="avail-msg" id="availMsg"></div>
+          </div>
+          <div class="field">
+            <label for="duration">المدة (بالساعات)</label>
+            <input type="number" id="duration" name="duration" min="1" step="0.5" required placeholder="مثال: 2">
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="name">الاسم</label>
+              <input type="text" id="name" name="name" required placeholder="الاسم الكامل">
+            </div>
+            <div class="field">
+              <label for="guests">عدد الأشخاص</label>
+              <input type="number" id="guests" name="guests" min="1" required placeholder="اكتب عدد الأفراد">
+            </div>
+          </div>
+          <div class="field">
+            <label for="phone">رقم الهاتف</label>
+            <input type="tel" id="phone" name="phone" required placeholder="مثال: 01012345678">
+          </div>
+          <button type="submit" class="submit-btn" id="submitBtn">احجز الآن</button>
+          <div class="status-msg" id="statusMsg"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section tint">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span class="dot"></span> كيف يعمل</div>
+      <h2>ثلاث خطوات وتكون جاهز</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>اختر الغرفة</h3>
+        <p>5 غرف مختلفة — اختر اللي يناسبك.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>حدد التاريخ والوقت والمدة</h3>
+        <p>مفتوحين 24 ساعة، احجز في أي وقت يناسبك.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>أكد على واتساب</h3>
+        <p>ضغطة واحدة ترسل طلبك — نرد بكلمة "تم التأكيد" ويكون مكانك محجوز.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-brand"><img class="foot-logo" src="data:image/jpeg;base64,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" alt="H"> <span class="foot-mark">Hustle House</span></div>
+    <div class="foot-branches">
+      <div>المشايه — أمام بوابة البارون، أعلى محل سيكريت، الدور الأول</div>
+      <div>مفتوحين 24 ساعة</div>
+    </div>
+    <div>© <span id="year"></span> Hustle House</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ============================================================
+     CONFIG — استبدل القيم دي قبل النشر
+     ============================================================ */
+  const GOOGLE_SHEETS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwPIXT8IIsrN2-qXs4GiY46PFDQycqdeZwg6cqs-MAJPgD4vrODzfXsCNVpYPr08VGGlg/exec";
+  const RESTAURANT_WHATSAPP_NUMBER = "PASTE_WHATSAPP_NUMBER"; // كود الدولة + الرقم بدون + أو مسافات، مثال: 201012345678
+
+  const form = document.getElementById('bookingForm');
+  const statusMsg = document.getElementById('statusMsg');
+  const submitBtn = document.getElementById('submitBtn');
+  const availMsg = document.getElementById('availMsg');
+  const dateField = document.getElementById('date');
+  const timeField = document.getElementById('time');
+  const roomField = document.getElementById('room');
+  const branchField = document.getElementById('branch');
+  const durationField = document.getElementById('duration');
+
+  let slotIsBusy = false;
+  let availCheckToken = 0;
+
+  // مفتوحين 24 ساعة، فمفيش قيد على مواعيد العمل هنا
+
+  async function checkAvailability() {
+    const date = dateField.value;
+    const time = timeField.value;
+    const room = roomField.value;
+    const branch = branchField.value;
+    const duration = durationField.value;
+
+    if (!date || !time || !room || !branch) {
+      availMsg.className = "avail-msg";
+      slotIsBusy = false;
+      return;
+    }
+
+    if (!GOOGLE_SHEETS_WEB_APP_URL || GOOGLE_SHEETS_WEB_APP_URL.includes("PASTE_YOUR")) {
+      availMsg.className = "avail-msg";
+      slotIsBusy = false;
+      return;
+    }
+
+    const myToken = ++availCheckToken;
+    availMsg.textContent = "بنتأكد من المعاد…";
+    availMsg.className = "avail-msg show checking";
+
+    try {
+      const url = `${GOOGLE_SHEETS_WEB_APP_URL}?branch=${encodeURIComponent(branch)}&room=${encodeURIComponent(room)}&date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}&duration=${encodeURIComponent(duration || 1)}`;
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 7000);
+      const res = await fetch(url, { signal: controller.signal });
+      clearTimeout(timeoutId);
+      const result = await res.json();
+
+      if (myToken !== availCheckToken) return;
+
+      if (result.available === false) {
+        availMsg.textContent = "الغرفة محجوزة في المعاد ده — جرب معاد تاني";
+        availMsg.className = "avail-msg show busy";
+        slotIsBusy = true;
+      } else {
+        availMsg.textContent = "المعاد متاح ✓";
+        availMsg.className = "avail-msg show free";
+        slotIsBusy = false;
+      }
+    } catch (err) {
+      if (myToken !== availCheckToken) return;
+      console.error("Availability check failed:", err);
+      availMsg.className = "avail-msg";
+      slotIsBusy = false;
+    }
+  }
+
+  dateField.addEventListener('change', checkAvailability);
+  timeField.addEventListener('change', checkAvailability);
+  roomField.addEventListener('change', checkAvailability);
+  durationField.addEventListener('change', checkAvailability);
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const waTab = window.open("", "_blank");
+
+    await checkAvailability();
+    if (slotIsBusy) {
+      if (waTab) waTab.close();
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "جاري الحجز…";
+
+    const data = Object.fromEntries(new FormData(form).entries());
+    data.timestamp = new Date().toISOString();
+
+    function formatTime12h(t) {
+      const [h, m] = t.split(":").map(Number);
+      const period = h >= 12 ? "PM" : "AM";
+      const h12 = h % 12 === 0 ? 12 : h % 12;
+      return `${h12}:${String(m).padStart(2, "0")} ${period}`;
+    }
+    const timeDisplay = formatTime12h(data.time);
+    data.time_12h = timeDisplay;
+
+    let sheetRequestSent = false;
+
+    try {
+      if (GOOGLE_SHEETS_WEB_APP_URL && !GOOGLE_SHEETS_WEB_APP_URL.includes("PASTE_YOUR")) {
+        await fetch(GOOGLE_SHEETS_WEB_APP_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain" },
+          body: JSON.stringify(data)
+        });
+        sheetRequestSent = true;
+      }
+    } catch (err) {
+      console.error("Sheet logging failed:", err);
+    }
+
+    const message =
+      `حجز جديد:\n` +
+      `الاسم: ${data.name}\n` +
+      `الفرع: ${data.branch}\n` +
+      `الغرفة: ${data.room}\n` +
+      `التاريخ: ${data.date}\n` +
+      `الوقت: ${timeDisplay}\n` +
+      `المدة: ${data.duration} ساعة\n` +
+      `عدد الأشخاص: ${data.guests}\n` +
+      `رقم الهاتف: ${data.phone}`;
+
+    const waUrl = `https://wa.me/${RESTAURANT_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+    if (sheetRequestSent) {
+      statusMsg.textContent = "تم إرسال الحجز — جاري فتح واتساب!";
+      statusMsg.className = "status-msg show ok";
+    } else {
+      statusMsg.textContent = "الحجز اتبعت لواتساب فقط — لم يتم إرسال طلب للشيت (تحقق من الرابط).";
+      statusMsg.className = "status-msg show err";
+    }
+    if (waTab) {
+      waTab.location.href = waUrl;
+    } else {
+      window.open(waUrl, "_blank");
+    }
+
+    submitBtn.disabled = false;
+    submitBtn.textContent = "احجز الآن";
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
